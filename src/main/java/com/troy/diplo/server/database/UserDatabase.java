@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.ByteOrder;
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.*;
 
@@ -57,11 +58,11 @@ public class UserDatabase {
 		return createDatabase(server, file, DEFAULT_ITERATIONS, DEFAULT_HASH_BYTES, DEFAULT_SALT_BYTES, DEFAULT_PEPPER_BYTES);
 	}
 
-	public static UserDatabase createDatabase(DiploServer server, File file, int currentIterations, int hashBytes, int saltBytes, int pepperBytes)
-			throws IOException {
+	public static UserDatabase createDatabase(DiploServer server, File file, int currentIterations, int hashBytes, int saltBytes,
+			int pepperBytes) throws IOException {
 		file.delete();
 		file.createNewFile();
-//pepperFile, accountsFile, teamsFile, gamesFile;
+		// pepperFile, accountsFile, teamsFile, gamesFile;
 		String parent = file.getParent();
 		File pepperFile = new File(parent, "pepper.dat"), accountsFile = new File(parent, "accounts.dat"),
 				teamsFile = new File(parent, "teams.dat"), gamesFile = new File(parent, "games.dat");
@@ -82,7 +83,7 @@ public class UserDatabase {
 		buffer.writeString(accountsFile.getAbsolutePath());
 		buffer.writeString(teamsFile.getAbsolutePath());
 		buffer.writeString(gamesFile.getAbsolutePath());
-		
+
 		buffer.writeInt(currentIterations);
 		buffer.writeInt(hashBytes);
 		buffer.writeInt(saltBytes);
@@ -109,12 +110,11 @@ public class UserDatabase {
 		this.saltBytes = buffer.readInt();
 		this.totalUsers = buffer.readInt();
 		this.pepper = MiscUtil.readToByteArray(pepperFile);
-		
-		
+
 		this.games = new GameList(gamesFile);
 		this.users = new UserList(accountsFile);
 		this.teams = new TeamList(teamsFile);
-		
+
 		games.readIDs();
 
 	}
@@ -246,6 +246,13 @@ public class UserDatabase {
 
 	public DatabaseAccount getUser(String username) {
 		return users.getAccount(username);
+	}
+
+	public void listUsers() {
+		System.out.println("There are currently " + users.getUsers().size() + " users registered");
+		for (Entry<String, DatabaseAccount> entry : users.getUsers().entrySet()) {
+			System.out.println("\t" + entry.getValue());
+		}
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.troy.diplo.commands;
 
 import com.troy.diplo.server.DiploServer;
+import com.troy.diplo.server.database.DatabaseAccount;
 import com.troyberry.util.MiscUtil;
 
 public class CommandsParser {
@@ -33,7 +34,36 @@ public class CommandsParser {
 						+ commands[3] + "\"");
 			}
 			if (commands[0].equalsIgnoreCase("auth")) {
-				System.out.println(server.areCredentialsValid(commands[1], commands[2].toCharArray()) ? "Authentication succscful!" : "Invalid username or password");
+				System.out.println(server.areCredentialsValid(commands[1], commands[2].toCharArray()) ? "Authentication succscful!"
+						: "Invalid username or password");
+			}
+			if (commands[0].equalsIgnoreCase("list")) {
+				if (commands[1].equalsIgnoreCase("users")) {
+					server.getDatabase().listUsers();
+				}
+			}
+			if (commands[0].equalsIgnoreCase("delete") || commands[0].equalsIgnoreCase("remove")) {
+				if (commands[1].equalsIgnoreCase("user")) {
+					String username = commands[2];
+					if (server.containsUser(username)) {
+						DatabaseAccount acc = server.getDatabase().getUsers().getUsers().remove(username);
+						if (acc != null)
+							System.out.println("Succscfully removed user \"" + username + "\"");
+					} else {
+						System.out.println("Unknown user \"" + username + "\"");
+					}
+
+				}
+			}
+			if (commands[0].equalsIgnoreCase("print")) {
+				if (commands[1].equalsIgnoreCase("user")) {
+					String username = commands[2];
+					if (server.containsUser(username)) {
+						System.out.println(server.getAccount(username));
+					} else {
+						System.out.println("Unknown user \"" + username + "\"");
+					}
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("Unknown command \"" + line + "\"\n" + MiscUtil.getStackTrace(e));
