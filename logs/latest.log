@@ -1,0 +1,8 @@
+2017-09-12 00:31:50.201 [main] [INFO] com.troy.diplo.server.Main: Starting Server
+2017-09-12 00:31:50.215 [main] [INFO] com.troy.diplo.server.database.UserDatabase: Loading extisting database at .\database.dat
+2017-09-12 00:31:51.003 [Server Network Setup-Thread] [INFO] com.troy.diplo.server.net.DiploServerNet: Attempting to bind server socket
+2017-09-12 00:31:51.608 [Server Network Setup-Thread] [INFO] com.troy.diplo.server.net.DiploServerNet: Server ready to recieve connectitions
+2017-09-12 00:32:00.298 [main] [INFO] com.troy.diplo.server.DiploServer: Preparing to shutdown server
+2017-09-12 00:32:00.301 [main] [INFO] com.troy.diplo.server.net.DiploServerNet: Server socket closing
+2017-09-12 00:32:00.305 [main] [INFO] com.troy.diplo.server.database.UserDatabase: Saved database to file .\database.dat
+2017-09-12 00:32:02.609 [main] [INFO] com.troy.diplo.server.DiploServer: server shutdown

@@ -67,6 +67,10 @@ public class UserList extends RefrenceTypeHandler<DatabaseAccount>{
 		return list;
 	}
 	
+	public HashMap<String, DatabaseAccount> getUsers() {
+		return users;
+	}
+	
 	public void cleanUp() {
 		super.cleanUp();
 	}

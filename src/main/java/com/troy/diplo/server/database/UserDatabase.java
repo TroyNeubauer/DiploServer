@@ -29,6 +29,8 @@ public class UserDatabase {
 	private TroyBuffer buffer;
 
 	private UserList users;
+	private GameList games;
+	private TeamList teams;
 
 	private File pepperFile, accountsFile, teamsFile, gamesFile;
 	private byte[] pepper;
@@ -108,7 +110,12 @@ public class UserDatabase {
 		this.totalUsers = buffer.readInt();
 		this.pepper = MiscUtil.readToByteArray(pepperFile);
 		
+		
+		this.games = new GameList(gamesFile);
 		this.users = new UserList(accountsFile);
+		this.teams = new TeamList(teamsFile);
+		
+		games.readIDs();
 
 	}
 
@@ -136,6 +143,8 @@ public class UserDatabase {
 			logger.fatal("Unable to save database!\n" + MiscUtil.getStackTrace(e));
 		}
 		users.cleanUp();
+		games.cleanUp();
+		teams.cleanUp();
 
 	}
 

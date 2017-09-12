@@ -25,6 +25,10 @@ public class DiploServer {
 		}
 		this.net = new DiploServerNet(this);
 	}
+	
+	public boolean containsUser(String username) {
+		return database.containsUser(username);
+	}
 
 	public final boolean areCredentialsValid(String username, char[] password) {
 		return database.areCredentialsValid(username, password);
