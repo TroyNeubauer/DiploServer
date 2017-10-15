@@ -1,12 +1,17 @@
 package com.troy.diplo.server;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.*;
 
+import com.esotericsoftware.kryo.io.OutputChunked;
 import com.troy.diplo.commands.CommandsParser;
+import com.troy.diplo.game.*;
 import com.troy.diplo.server.database.DatabaseAccount;
+import com.troyberry.internal.LibraryUtils;
+import com.troyberry.util.*;
+import com.troyberry.util.serialization.*;
 
 public class Main {
 
@@ -14,7 +19,7 @@ public class Main {
 
 	private static final Logger logger = LogManager.getLogger(Main.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		DiploServer server = null;
 		try {
 			logger.info("Starting Server");
@@ -30,9 +35,10 @@ public class Main {
 			 */
 
 			// server.registerUser("NEW_USER!", "YEAH_YEAH".toCharArray(), "newuser@gmail.com");
-		} catch (Throwable t) {
+		} catch (Throwable r) {
 			logger.fatal("Unhandled exception in main");
-			logger.catching(Level.FATAL, t);
+			logger.catching(Level.FATAL, r);
+			System.exit(1);
 		}
 		Scanner scanner = new Scanner(System.in);
 		CommandsParser parser = new CommandsParser(server);

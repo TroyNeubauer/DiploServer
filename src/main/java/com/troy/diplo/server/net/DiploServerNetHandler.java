@@ -73,7 +73,7 @@ public class DiploServerNetHandler extends ChannelInboundHandlerAdapter {
 		String username = new String(data.getUsername());
 		boolean validCredentals = server.areCredentialsValid(username, data.getPassword());
 		if (validCredentals) {
-			ctx.writeAndFlush(new LoginReply(true, server.getAccount(username).getAccount()));
+			ctx.writeAndFlush(new LoginReply(true, server.getAccount(username).getAccount().getProfile()));
 		} else {
 			ctx.writeAndFlush(new LoginReply(false, null));
 		}

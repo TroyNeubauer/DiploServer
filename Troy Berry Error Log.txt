@@ -1,0 +1,11 @@
+[Troy Berry] 	OS: Windows 10 v10.0
+[Troy Berry] 	JRE: 1.8.0_144 amd64
+[Troy Berry] 	JVM: Java HotSpot(TM) 64-Bit Server VM v25.144-b01 by Oracle Corporation
+[Troy Berry] Attempting to load TroyBerry native library
+[Troy Berry] Attempting to load TroyBerry native library from java.library.path
+[Troy Berry] Failed to load TroyBerry native library from java.library.path
+[Troy Berry] Attempting to load TroyBerry native library from classpath
+[Troy Berry] Failed to load TroyBerry native library from stream because the stream was null (Classpath)
+[Troy Berry] sun.misc.Unsafe Is diaabled because of the vm arg TBDisableUnsafe was set to "true"
+[Troy Berry] [SEVERE] Failed to load TroyBerry native library!!!!
+[Troy Berry] [SEVERE] This will most likley result in errors later when native methods are called!!!
